@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos | Kingdale Technologies</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #000000;
+            --muted: #5a5a5a;
+            --border: #e5e5e5;
+            --accent: #0066ff;
+            --space: 20px;
+            --radius: 12px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: var(--space);
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space);
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 36px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .back-link {
+            color: var(--muted);
+            text-decoration: none;
+            border: 1px solid var(--border);
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--text);
+            border-color: var(--text);
+        }
+
+        .hero {
+            margin: 40px 0 30px;
+            max-width: 840px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+        }
+
+        .lede {
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space);
+        }
+
+        .card {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: var(--space);
+            transition: all 0.2s ease;
+            background: var(--bg);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--text);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(0, 102, 255, 0.1);
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .card h2 {
+            margin-bottom: 8px;
+            font-size: 1.25rem;
+        }
+
+        .card p {
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .link {
+            color: var(--text);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .link:hover {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a class="logo" href="../">
+            <img src="../assets/logos/Logo1.png" alt="Kingdale Technologies logo">
+            <span>KINGDALE</span>
+        </a>
+        <a class="back-link" href="../">Volver al home</a>
+    </header>
+
+    <section class="hero">
+        <h1>Proyectos destacados</h1>
+        <p class="lede">Recopilación de implementaciones recientes en IoT, cloud y software que demuestran nuestra filosofía de sistemas inteligentes y liderazgo conectado.</p>
+    </section>
+
+    <section class="grid">
+        <article class="card">
+            <span class="badge">Proyecto 1</span>
+            <h2>Monitoreo IoT Industrial</h2>
+            <p>Arquitectura edge-to-cloud para 500+ sensores, panel en tiempo real y alertas automáticas con modelos predictivos.</p>
+            <a class="link" href="./project-1/">Entrar →</a>
+        </article>
+        <article class="card">
+            <span class="badge">Proyecto 2</span>
+            <h2>Plataforma de Datos</h2>
+            <p>Pipeline unificado de datos, ingesta en streaming y APIs para equipos de producto y analítica avanzada.</p>
+            <a class="link" href="./project-2/">Entrar →</a>
+        </article>
+        <article class="card">
+            <span class="badge">Próximamente</span>
+            <h2>Expande tu caso de uso</h2>
+            <p>¿Tienes un proyecto para agregar? Crea una carpeta, añade recursos y enlázalo aquí para mantener el catálogo vivo.</p>
+            <a class="link" href="mailto:hello@kingdale.tech">Proponer →</a>
+        </article>
+    </section>
+</body>
+</html>

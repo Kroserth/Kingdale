@@ -2062,10 +2062,7 @@
         window.addEventListener('resize', () => {
             particlesCanvas.width = window.innerWidth;
             particlesCanvas.height = window.innerHeight;
-            // Rebuild IoT orbits when canvas size changes significantly
-            centerX = iotCanvas.width / 2;
-            centerY = iotCanvas.height / 2;
-            buildOrbitPackets();
+            resizeIotCanvas();
         });
 
         // ============================================
@@ -2073,6 +2070,9 @@
         // ============================================
         const iotCanvas = document.getElementById('iotCanvas');
         const iotCtx = iotCanvas.getContext('2d');
+        const orbitPackets = [];
+        let centerX = 0;
+        let centerY = 0;
 
         function resizeIotCanvas() {
             const rect = iotCanvas.parentElement.getBoundingClientRect();
@@ -2084,6 +2084,19 @@
         }
         resizeIotCanvas();
         window.addEventListener('resize', resizeIotCanvas);
+
+        function buildOrbitPackets() {
+            orbitPackets.length = 0;
+            const orbitBase = Math.min(iotCanvas.width, iotCanvas.height) * 0.35;
+            for (let i = 0; i < 28; i++) {
+                orbitPackets.push({
+                    angle: Math.random() * Math.PI * 2,
+                    speed: 0.002 + Math.random() * 0.004,
+                    radius: orbitBase * (0.6 + Math.random() * 0.5),
+                    size: 1 + Math.random() * 2
+                });
+            }
+        }
 
         class IoTNode {
             constructor(x, y, isHub = false) {
@@ -2126,9 +2139,6 @@
         }
 
         const iotNodes = [];
-        let centerX = iotCanvas.width / 2;
-        let centerY = iotCanvas.height / 2;
-
         const hub = new IoTNode(centerX, centerY, true);
         iotNodes.push(hub);
 
@@ -2145,21 +2155,6 @@
         }
 
         let iotAnimationOffset = 0;
-        const orbitPackets = [];
-
-        function buildOrbitPackets() {
-            orbitPackets.length = 0;
-            const orbitBase = Math.min(iotCanvas.width, iotCanvas.height) * 0.35;
-            for (let i = 0; i < 28; i++) {
-                orbitPackets.push({
-                    angle: Math.random() * Math.PI * 2,
-                    speed: 0.002 + Math.random() * 0.004,
-                    radius: orbitBase * (0.6 + Math.random() * 0.5),
-                    size: 1 + Math.random() * 2
-                });
-            }
-        }
-        buildOrbitPackets();
 
         function animateIoT() {
             if (iotCanvas.width === 0) {

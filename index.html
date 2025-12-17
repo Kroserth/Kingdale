@@ -1047,6 +1047,8 @@
         .stats-section {
             background: var(--color-text);
             color: var(--color-bg);
+            position: relative;
+            overflow: hidden;
         }
 
         .stats-section .section-title {
@@ -1062,6 +1064,21 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: var(--space-xl);
             margin-top: var(--space-2xl);
+        }
+
+        .stats-watermark {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            pointer-events: none;
+            opacity: 0.08;
+        }
+
+        .stats-watermark img {
+            max-width: 360px;
+            width: 40vw;
+            filter: invert(1);
         }
 
         .stats-grid .stat-card {
@@ -1105,6 +1122,13 @@
             background: var(--color-bg);
         }
 
+        .cta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-xl);
+            align-items: start;
+        }
+
         .cta-title {
             font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 700;
@@ -1122,8 +1146,7 @@
         }
 
         .contact-form {
-            max-width: 500px;
-            margin: 0 auto;
+            max-width: 540px;
             display: flex;
             flex-direction: column;
             gap: var(--space-md);
@@ -1207,6 +1230,34 @@
             text-align: center;
             font-weight: 500;
             display: none;
+        }
+
+        .cta-card {
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: var(--space-xl);
+            background: linear-gradient(140deg, rgba(0, 102, 255, 0.08), rgba(0, 0, 0, 0.03));
+            display: grid;
+            gap: var(--space-sm);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .cta-card img {
+            width: 180px;
+            max-width: 100%;
+            justify-self: start;
+            filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.15));
+        }
+
+        .cta-card h4 {
+            font-size: 1.125rem;
+            letter-spacing: -0.01em;
+        }
+
+        .cta-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.98rem;
+            line-height: 1.5;
         }
 
         .form-message.success {
@@ -1747,6 +1798,9 @@
             <div class="section-header">
                 <h2 class="section-title">Números que Hablan</h2>
             </div>
+            <div class="stats-watermark">
+                <img src="assets/logos/Logo3.png" alt="Kingdale watermark">
+            </div>
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-number" data-count="150">0</div>
@@ -1771,17 +1825,26 @@
     <!-- CTA Section -->
     <section class="section cta-section" id="contact">
         <div class="container">
-            <h2 class="cta-title reveal">¿Listo Para Transformar Tu Negocio?</h2>
-            <p class="cta-description reveal">
-                Contáctanos y descubre cómo nuestras soluciones pueden llevar tu empresa al siguiente nivel.
-            </p>
-            <form class="contact-form reveal" id="contactForm">
-                <input type="text" class="form-input" placeholder="Nombre" required>
-                <input type="email" class="form-input" placeholder="Email" required>
-                <textarea class="form-textarea" placeholder="Cuéntanos sobre tu proyecto" required></textarea>
-                <button type="submit" class="form-submit"><span>Enviar Mensaje</span></button>
-                <div class="form-message" id="formMessage"></div>
-            </form>
+            <div class="cta-grid">
+                <div>
+                    <h2 class="cta-title reveal">¿Listo Para Transformar Tu Negocio?</h2>
+                    <p class="cta-description reveal">
+                        Contáctanos y descubre cómo nuestras soluciones pueden llevar tu empresa al siguiente nivel.
+                    </p>
+                    <form class="contact-form reveal" id="contactForm">
+                        <input type="text" class="form-input" placeholder="Nombre" required>
+                        <input type="email" class="form-input" placeholder="Email" required>
+                        <textarea class="form-textarea" placeholder="Cuéntanos sobre tu proyecto" required></textarea>
+                        <button type="submit" class="form-submit"><span>Enviar Mensaje</span></button>
+                        <div class="form-message" id="formMessage"></div>
+                    </form>
+                </div>
+                <div class="cta-card reveal">
+                    <img src="assets/logos/Logo2.png" alt="Logo Kingdale destacado">
+                    <h4>Kingdale Technologies</h4>
+                    <p>Identidad sólida y confiable: reforzamos la marca en cada interacción para dar certeza a tus stakeholders.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -2310,6 +2373,8 @@
         } catch (e) {
             animateStats();
         }
+        // Asegura animación en caso de no disparar (carga rápida)
+        setTimeout(animateStats, 1200);
 
         // ============================================
         // TESTIMONIAL SLIDER

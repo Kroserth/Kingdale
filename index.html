@@ -746,16 +746,45 @@
         .iot-visual {
             margin: var(--space-2xl) 0;
             padding: var(--space-2xl);
-            background: var(--color-bg);
-            border-radius: 16px;
+            background: radial-gradient(circle at 20% 20%, rgba(0, 102, 255, 0.15), transparent 40%), radial-gradient(circle at 80% 60%, rgba(0, 0, 0, 0.08), transparent 45%), var(--color-bg);
+            border-radius: 18px;
             border: 1px solid var(--color-border);
             text-align: center;
-            min-height: 500px;
+            min-height: 520px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .iot-visual .glow {
+            position: absolute;
+            inset: -40%;
+            background: radial-gradient(circle, rgba(0, 102, 255, 0.18), transparent 65%);
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .iot-visual .grid-overlay,
+        .iot-visual .grid-overlay::after {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+            background-size: 80px 80px;
+            opacity: 0.25;
+            animation: gridShift 18s linear infinite;
+            pointer-events: none;
+        }
+
+        .iot-visual .grid-overlay::after {
+            content: '';
+            background-size: 120px 120px;
+            animation-duration: 24s;
+            mix-blend-mode: soft-light;
         }
 
         .iot-canvas {
@@ -764,6 +793,11 @@
             position: absolute;
             top: 0;
             left: 0;
+        }
+
+        @keyframes gridShift {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-80px, -80px, 0); }
         }
 
         .iot-stats {
@@ -1152,6 +1186,40 @@
             padding: var(--space-2xl) 0 var(--space-md);
         }
 
+        .brand-banner {
+            padding: var(--space-2xl) 0;
+        }
+
+        .brand-banner-inner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            align-items: center;
+            gap: var(--space-xl);
+            padding: var(--space-2xl);
+            border: 1px solid var(--color-border);
+            border-radius: 18px;
+            background: linear-gradient(120deg, rgba(0, 102, 255, 0.12), rgba(0, 0, 0, 0.03));
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .brand-banner h3 {
+            font-size: clamp(1.8rem, 3vw, 2.3rem);
+            margin-bottom: var(--space-sm);
+            letter-spacing: -0.03em;
+        }
+
+        .brand-banner p {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-md);
+        }
+
+        .brand-banner img {
+            width: 100%;
+            max-width: 360px;
+            justify-self: center;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+        }
+
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1459,6 +1527,8 @@
                 </p>
             </div>
             <div class="iot-visual reveal">
+                <div class="glow"></div>
+                <div class="grid-overlay"></div>
                 <canvas class="iot-canvas" id="iotCanvas"></canvas>
             </div>
             <div class="iot-stats">
@@ -1478,6 +1548,22 @@
                     <div class="stat-number" data-target="50">0</div>
                     <div class="stat-label">Integraciones</div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Banner -->
+    <section class="section brand-banner">
+        <div class="container">
+            <div class="brand-banner-inner reveal">
+                <div>
+                    <h3>Identidad sólida y memorable</h3>
+                    <p>Mostramos el sello de KINGDALE en grande para reforzar confianza y consistencia visual en cada punto de contacto.</p>
+                    <div class="brand-logos">
+                        <img src="assets/logos/Logo2.png" alt="Logo principal Kingdale en grande">
+                    </div>
+                </div>
+                <img src="assets/logos/Logo3.png" alt="Isotipo Kingdale destacado">
             </div>
         </div>
     </section>
@@ -1907,6 +1993,10 @@
         window.addEventListener('resize', () => {
             particlesCanvas.width = window.innerWidth;
             particlesCanvas.height = window.innerHeight;
+            // Rebuild IoT orbits when canvas size changes significantly
+            centerX = iotCanvas.width / 2;
+            centerY = iotCanvas.height / 2;
+            buildOrbitPackets();
         });
 
         // ============================================
@@ -1919,6 +2009,9 @@
             const rect = iotCanvas.parentElement.getBoundingClientRect();
             iotCanvas.width = rect.width;
             iotCanvas.height = rect.height;
+            centerX = iotCanvas.width / 2;
+            centerY = iotCanvas.height / 2;
+            buildOrbitPackets();
         }
         resizeIotCanvas();
         window.addEventListener('resize', resizeIotCanvas);
@@ -1983,6 +2076,21 @@
         }
 
         let iotAnimationOffset = 0;
+        const orbitPackets = [];
+
+        function buildOrbitPackets() {
+            orbitPackets.length = 0;
+            const orbitBase = Math.min(iotCanvas.width, iotCanvas.height) * 0.35;
+            for (let i = 0; i < 28; i++) {
+                orbitPackets.push({
+                    angle: Math.random() * Math.PI * 2,
+                    speed: 0.002 + Math.random() * 0.004,
+                    radius: orbitBase * (0.6 + Math.random() * 0.5),
+                    size: 1 + Math.random() * 2
+                });
+            }
+        }
+        buildOrbitPackets();
 
         function animateIoT() {
             if (iotCanvas.width === 0) {
@@ -2026,6 +2134,23 @@
             iotNodes.forEach(node => {
                 node.update();
                 node.draw();
+            });
+
+            // Orbiting data packets
+            orbitPackets.forEach(packet => {
+                packet.angle += packet.speed;
+                const x = centerX + Math.cos(packet.angle) * packet.radius;
+                const y = centerY + Math.sin(packet.angle * 1.1) * (packet.radius * 0.8);
+
+                const gradient = iotCtx.createRadialGradient(x, y, 0, x, y, 12);
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                gradient.addColorStop(0, isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.9)');
+                gradient.addColorStop(1, isDark ? 'rgba(255,255,255,0)' : 'rgba(0,0,0,0)');
+
+                iotCtx.beginPath();
+                iotCtx.fillStyle = gradient;
+                iotCtx.arc(x, y, packet.size + 1, 0, Math.PI * 2);
+                iotCtx.fill();
             });
 
             iotAnimationOffset += 0.01;

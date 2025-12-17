@@ -1370,6 +1370,7 @@
             text-align: center;
             box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
             transition: transform var(--transition), box-shadow var(--transition);
+            cursor: zoom-in;
         }
 
         .logo-card:hover {
@@ -1754,31 +1755,35 @@
                     <p class="section-description" style="margin: 0;">Explora versiones y usos del logotipo para diferentes aplicaciones.</p>
                 </div>
                 <div class="logo-wall-grid">
-                    <div class="logo-card">
+                    <div class="logo-card" data-full="assets/logos/Logo1.png" aria-label="Ampliar logo primario">
                         <img src="assets/logos/Logo1.png" alt="Logo Kingdale 1">
                         <small>Primario</small>
                     </div>
-                    <div class="logo-card">
+                    <div class="logo-card" data-full="assets/logos/Logo2.png" aria-label="Ampliar logo secundario">
                         <img src="assets/logos/Logo2.png" alt="Logo Kingdale 2">
                         <small>Secundario</small>
                     </div>
-                    <div class="logo-card">
+                    <div class="logo-card" data-full="assets/logos/Logo3.png" aria-label="Ampliar isotipo">
                         <img src="assets/logos/Logo3.png" alt="Logo Kingdale 3">
                         <small>Isotipo</small>
                     </div>
-                    <div class="logo-card">
+                    <div class="logo-card" data-full="assets/logos/Logo4.png" aria-label="Ampliar logo contrastado">
                         <img src="assets/logos/Logo4.png" alt="Logo Kingdale 4">
                         <small>Contrastado</small>
                     </div>
-                    <div class="logo-card">
+                    <div class="logo-card" data-full="assets/logos/Logo5.jpg" aria-label="Ampliar versión fotográfica">
                         <img src="assets/logos/Logo5.jpg" alt="Logo Kingdale 5">
                         <small>Versión fotográfica</small>
                     </div>
-                    <div class="logo-card">
+                    <div class="logo-card" data-full="assets/logos/Logo6.png" aria-label="Ampliar logo 6">
+                        <img src="assets/logos/Logo6.png" alt="Logo Kingdale 6">
+                        <small>Variante</small>
+                    </div>
+                    <div class="logo-card" data-full="assets/logos/LogoX.png" aria-label="Ampliar logo experimental">
                         <img src="assets/logos/LogoX.png" alt="Logo Kingdale X">
                         <small>Experimental A</small>
                     </div>
-                    <div class="logo-card">
+                    <div class="logo-card" data-full="assets/logos/LogoX2.png" aria-label="Ampliar logo experimental B">
                         <img src="assets/logos/LogoX2.png" alt="Logo Kingdale X2">
                         <small>Experimental B</small>
                     </div>
@@ -2596,6 +2601,14 @@
             btn.addEventListener('click', () => {
                 const img = btn.querySelector('img');
                 const src = btn.getAttribute('data-full') || img.src;
+                openBrandModal(src, img.alt);
+            });
+        });
+
+        document.querySelectorAll('.logo-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const img = card.querySelector('img');
+                const src = card.getAttribute('data-full') || img.src;
                 openBrandModal(src, img.alt);
             });
         });

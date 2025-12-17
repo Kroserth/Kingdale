@@ -32,3 +32,4 @@ Landing page con branding y animaciones para Kingdale Technologies. Incluye vari
 - Cambia el logo principal en el header reemplazando `assets/logos/Logo1.png`.  
 - Agrega imágenes de proyectos en `assets/images/` y enlázalas desde `projects/`.  
 - Añade más proyectos copiando una carpeta en `projects/` y enlazándola desde `projects/index.html`.
+# Kingdale

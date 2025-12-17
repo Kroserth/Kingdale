@@ -1324,6 +1324,73 @@
             filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
         }
 
+        /* ============================================
+           LOGO WALL
+           ============================================ */
+        .logo-wall {
+            padding: var(--space-2xl) 0;
+        }
+
+        .logo-wall-inner {
+            border: 1px solid var(--color-border);
+            border-radius: 18px;
+            padding: var(--space-2xl);
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.08), rgba(0, 0, 0, 0.02));
+            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-wall-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+
+        .logo-wall-header h3 {
+            font-size: clamp(1.6rem, 3vw, 2rem);
+            letter-spacing: -0.02em;
+        }
+
+        .logo-wall-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .logo-card {
+            border: 1px solid var(--color-border);
+            border-radius: 14px;
+            padding: var(--space-md);
+            background: var(--color-bg);
+            display: grid;
+            gap: var(--space-xs);
+            align-content: center;
+            text-align: center;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+
+        .logo-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo-card img {
+            max-width: 120px;
+            max-height: 90px;
+            justify-self: center;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+        }
+
+        .logo-card small {
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1674,6 +1741,48 @@
                     </div>
                 </div>
                 <img src="assets/logos/Logo3.png" alt="Isotipo Kingdale destacado">
+            </div>
+        </div>
+    </section>
+
+    <!-- Logo Wall -->
+    <section class="section logo-wall">
+        <div class="container">
+            <div class="logo-wall-inner reveal">
+                <div class="logo-wall-header">
+                    <h3>Variantes de marca Kingdale</h3>
+                    <p class="section-description" style="margin: 0;">Explora versiones y usos del logotipo para diferentes aplicaciones.</p>
+                </div>
+                <div class="logo-wall-grid">
+                    <div class="logo-card">
+                        <img src="assets/logos/Logo1.png" alt="Logo Kingdale 1">
+                        <small>Primario</small>
+                    </div>
+                    <div class="logo-card">
+                        <img src="assets/logos/Logo2.png" alt="Logo Kingdale 2">
+                        <small>Secundario</small>
+                    </div>
+                    <div class="logo-card">
+                        <img src="assets/logos/Logo3.png" alt="Logo Kingdale 3">
+                        <small>Isotipo</small>
+                    </div>
+                    <div class="logo-card">
+                        <img src="assets/logos/Logo4.png" alt="Logo Kingdale 4">
+                        <small>Contrastado</small>
+                    </div>
+                    <div class="logo-card">
+                        <img src="assets/logos/Logo5.jpg" alt="Logo Kingdale 5">
+                        <small>Versión fotográfica</small>
+                    </div>
+                    <div class="logo-card">
+                        <img src="assets/logos/LogoX.png" alt="Logo Kingdale X">
+                        <small>Experimental A</small>
+                    </div>
+                    <div class="logo-card">
+                        <img src="assets/logos/LogoX2.png" alt="Logo Kingdale X2">
+                        <small>Experimental B</small>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
